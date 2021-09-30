@@ -9,10 +9,13 @@
             console.log("loaded via javascript");
             //TODO: add any extra onload processing you may need here
         });
-        function getCurrentSelection() {
+        function getCurrentSelection(page) {
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
-                //TODO: add code for processing the current selection 
+                //TODO: add code for processing the current selection
+
+                var h1tag = document.getElementsByTagName('a')[0].innerText;
+                updateCurrentPage(h1tag); 
 
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
@@ -20,6 +23,42 @@
     </script>
     <style>
         /* TODO: make edits here */
+        ul
+        {
+
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #3cb371;
+        }
+
+        li ul :before
+        {
+            content: '✓';
+        }
+
+        li
+        {
+            float: none;
+            background-color: orange;
+        }
+
+        li a
+        {
+            display: block;
+            color: red;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            float: left;
+        }
+
+        li a:hover
+        {
+            background-color: #111;
+        }
+        
     </style>
     <!-- make the necessary edits above this line -->
 
