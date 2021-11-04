@@ -213,6 +213,8 @@ function draw() {
   // Bounce the ball off the top/bottom
   if (ball.y < 0 || ball.y + ball.h > canvas.height) {
     ball.sY *= -1;
+    leftScore--;
+    rightScore--;
   }
   // Don't let the paddles go off screen
   [leftPaddle, rightPaddle].forEach(function(paddle) {
@@ -256,12 +258,16 @@ function draw() {
   context.textAlign = 'right';
   context.fillText('Score: ' + rightScore, canvas.width - 5, 24);
   // End the game or keep going
-  if (leftScore === 10 || rightScore === 10) {
+  if (rightScore - leftScore === 5 || leftScore - rightScore === 5) {
   	endGame();
   } else {
   	window.requestAnimationFrame(draw);
   }
 }
+
+
+
+
 
 // Show the menu to start the game
 menu();
