@@ -24,6 +24,7 @@
 
 - Milestone 1
     - [X] \10/30/2021 User will be able to register a new account
+      https://github.com/vincentprata/IT202-003/pull/40
       - Form Fields
         - [X] Username, email, password, confirm password (other fields optional)
         - [X] Email is required and must be validated
@@ -35,12 +36,9 @@
       - Email should be unique
       - Username should be unique
       - System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
-        - [ ] The only fields that may be cleared are the password fields
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 https://github.com/vincentprata/IT202-003/pull/40
+        - https://github.com/vincentprata/IT202-003/pull/42
+        - [X] The only fields that may be cleared are the password fields
+    - Status: Completed
     
 
      - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
