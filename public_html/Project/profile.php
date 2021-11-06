@@ -6,14 +6,27 @@ is_logged_in(true);
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
-
-    $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
-    $db = getDB();
-    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
-    try {
-        $stmt->execute($params);
-    } catch (Exception $e) {
-        users_check_duplicate($e->errorInfo);
+    $hasError = false;
+    //sanitize
+    $email = sanitize_email($email);
+    //validate
+    if (!is_valid_email($email)) {
+        flash("Invalid email address", "danger");
+        $hasError = true;
+    }
+    if (!preg_match('/^[a-z0-9_-]{3,16}$/i', $username)) {
+        flash("Username must only be alphanumeric and can only contain - or _", "danger");
+        $hasError = true;
+    }
+    if (!$hasError) {
+        $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+        $db = getDB();
+        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+        try {
+            $stmt->execute($params);
+        } catch (Exception $e) {
+            users_check_duplicate($e->errorInfo);
+        }
     }
     //select fresh data from table
     $stmt = $db->prepare("SELECT id, email, IFNULL(username, email) as `username` from Users where id = :id LIMIT 1");
@@ -114,12 +127,10 @@ $username = get_username();
             let outerDiv = document.createElement("div");
             outerDiv.className = "row justify-content-center";
             let innerDiv = document.createElement("div");
-
             //apply the CSS (these are bootstrap classes which we'll learn later)
             innerDiv.className = "alert alert-warning";
             //set the content
             innerDiv.innerText = "Password and Confirm password must match";
-
             outerDiv.appendChild(innerDiv);
             //add the element to the DOM (if we don't it merely exists in memory)
             flash.appendChild(outerDiv);*/
