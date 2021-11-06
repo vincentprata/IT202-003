@@ -102,16 +102,12 @@
       - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
         - Screenshot #1 description explaining what you're trying to show
 
-    - [ ] \(mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
+    - [X] \11/6/2021 Site should have basic styles/theme applied; everything should be styled
       - I.e., forms/input, navigation bar, etc
+        - https://github.com/vincentprata/IT202-003/pull/42
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
+    
 
      - [ ] \(mm/dd/yyyy of completion) Any output messages should be "user friendly"
       - Any technical errors or debug output displayed will result in a loss of points
