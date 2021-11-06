@@ -23,14 +23,14 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-    - [ ] \10/30/2021 User will be able to register a new account
+    - [X] \10/30/2021 User will be able to register a new account
       - Form Fields
         - [X] Username, email, password, confirm password (other fields optional)
-        - [ ] Email is required and must be validated
-        - [ ] Username is required
-        - [ ] Confirm password's match
+        - [X] Email is required and must be validated
+        - [X] Username is required
+        - [X] Confirm password's match
       - Users Table
-        - [ ] Id, username, email, password (60 characters), created modified
+        - [X] Id, username, email, password (60 characters), created modified
       - Password must be hashed (plain text passwords will lose points)
       - Email should be unique
       - Username should be unique
@@ -40,10 +40,8 @@
     - Status: Pending (Completed, Partially working, Incomplete, Pending)
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - PR link #1 https://github.com/vincentprata/IT202-003/pull/40
+    
 
      - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
       - Form
