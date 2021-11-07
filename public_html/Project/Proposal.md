@@ -64,20 +64,15 @@
     - Status: Completed
 
 
-     - [ ] \(mm/dd/yyyy of completion) Basic security rules implemented
+     - [X] \11/06/2021 Basic security rules implemented
+      - https://github.com/vincentprata/IT202-003/pull/32
       - Authentication:
-        - [ ] Function to check if user is logged in
-        - [ ] Function should be called on appropriate pages that only allow logged in users
+        - [X] Function to check if user is logged in
+        - [X] Function should be called on appropriate pages that only allow logged in users
       - Roles/Authorization:
-        - [ ] Have a roles table (see below)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+        - [X] Have a roles table (see below)
+    - Status: Completed
+
 
      - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
       - Have a Roles table (id, name, description, is_active, modified, created)
