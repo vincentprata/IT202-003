@@ -41,11 +41,12 @@
     - Status: Completed
     
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
+     - [X] \11/06/2021 User will be able to login to their account (given they enter the correct credentials)
       - Form
-        - [ ] User can login with email or username
+        - [X] User can login with email or username
           - This can be done as a single field or as two separate fields
-        - [ ] Password is required
+            - https://github.com/vincentprata/IT202-003/pull/44
+        - [X] Password is required
       - User should see friendly error messages when an account either doesn't exist or if passwords don't match
       - Logging in should fetch the user's details (and roles) and save them into the session
       - User will be directed to a landing page upon login
@@ -102,7 +103,7 @@
       - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
         - Screenshot #1 description explaining what you're trying to show
 
-    - [X] \11/6/2021 Site should have basic styles/theme applied; everything should be styled
+    - [X] \11/06/2021 Site should have basic styles/theme applied; everything should be styled
       - I.e., forms/input, navigation bar, etc
         - https://github.com/vincentprata/IT202-003/pull/42
   -  List of Evidence of Feature Completion
