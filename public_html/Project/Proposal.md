@@ -104,30 +104,18 @@
       - Any technical errors or debug output displayed will result in a loss of points
     - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
+     - [X] \11/06/2021 User will be able to see their profile
+      - https://github.com/vincentprata/IT202-003/pull/40
       - Email, username, etc
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to edit their profile
+     - [X] \11/06/2021 User will be able to edit their profile
+      - https://github.com/vincentprata/IT202-003/pull/40
       - Changing username/email should properly check to see if it's available before allowing the change
       - Any other fields should be properly validated
       - Allow password reset (only if the existing correct password is provided)
-        - [ ] Hint: logic for the password check would be similar to login
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show                     
+        - [X] Hint: logic for the password check would be similar to login
+    - Status: Completed                  
 
 
 - Milestone 2
