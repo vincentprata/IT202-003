@@ -74,18 +74,13 @@
     - Status: Completed
 
 
-     - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
+     - [X] \11/06/2021 Basic Roles implemented
+      - https://github.com/vincentprata/IT202-003/pull/32
       - Have a Roles table (id, name, description, is_active, modified, created)
       - Have a User Roles table (id, user_id, role_id, is_active, created, modified)
       - Include a function to check if a user has a specific role (we won't use it for this milestone but it should be usable in the future)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
+
 
     - [X] \11/06/2021 Site should have basic styles/theme applied; everything should be styled
       - I.e., forms/input, navigation bar, etc
