@@ -48,36 +48,25 @@
             - https://github.com/vincentprata/IT202-003/pull/44
         - [X] Password is required
       - User should see friendly error messages when an account either doesn't exist or if passwords don't match
+        - https://github.com/vincentprata/IT202-003/pull/17
       - Logging in should fetch the user's details (and roles) and save them into the session
       - User will be directed to a landing page upon login
-        - [ ] This is a protected page (non-logged in users shouldn't have access)
-        - [ ] This can be home, profile, a dashboard, etc
+        - [X] This is a protected page (non-logged in users shouldn't have access)
+        - [X] This can be home, profile, a dashboard, etc
 
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to logout
+     - [X] \11/06/2021 User will be able to logout
+      - https://github.com/vincentprata/IT202-003/pull/17
       - Logging out will redirect to login page
       - User should see a message that they've successfully logged out
       - Session should be destroyed (so the back button doesn't allow them access back in)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
+
 
      - [ ] \(mm/dd/yyyy of completion) Basic security rules implemented
       - Authentication:
-        - [ ] Function to check if user is loggin in
+        - [ ] Function to check if user is logged in
         - [ ] Function should be called on appropriate pages that only allow logged in users
       - Roles/Authorization:
         - [ ] Have a roles table (see below)
@@ -110,16 +99,10 @@
     - Status: Completed
     
 
-     - [ ] \(mm/dd/yyyy of completion) Any output messages should be "user friendly"
+     - [X] \11/06/2021 Any output messages should be "user friendly"
+      - https://github.com/vincentprata/IT202-003/pull/17
       - Any technical errors or debug output displayed will result in a loss of points
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
 
      - [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
       - Email, username, etc
