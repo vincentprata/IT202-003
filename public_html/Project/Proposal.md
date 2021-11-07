@@ -23,95 +23,89 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-    - [ ] \(mm/dd/yyyy of completion) User will be able to register a new account
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - [X] \10/30/2021 User will be able to register a new account
+      https://github.com/vincentprata/IT202-003/pull/40
+      - Form Fields
+        - [X] Username, email, password, confirm password (other fields optional)
+        - [X] Email is required and must be validated
+        - [X] Username is required
+        - [X] Confirm password's match
+      - Users Table
+        - [X] Id, username, email, password (60 characters), created modified
+      - Password must be hashed (plain text passwords will lose points)
+      - Email should be unique
+      - Username should be unique
+      - System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
+        - https://github.com/vincentprata/IT202-003/pull/42
+        - [X] The only fields that may be cleared are the password fields
+    - Status: Completed
+    
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+     - [X] \11/06/2021 User will be able to login to their account (given they enter the correct credentials)
+      - Form
+        - [X] User can login with email or username
+          - This can be done as a single field or as two separate fields
+            - https://github.com/vincentprata/IT202-003/pull/44
+        - [X] Password is required
+      - User should see friendly error messages when an account either doesn't exist or if passwords don't match
+        - https://github.com/vincentprata/IT202-003/pull/17
+      - Logging in should fetch the user's details (and roles) and save them into the session
+      - User will be directed to a landing page upon login
+        - [X] This is a protected page (non-logged in users shouldn't have access)
+        - [X] This can be home, profile, a dashboard, etc
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to logout
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) Basic security rules implemented
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+     - [X] \11/06/2021 User will be able to logout
+      - https://github.com/vincentprata/IT202-003/pull/17
+      - Logging out will redirect to login page
+      - User should see a message that they've successfully logged out
+      - Session should be destroyed (so the back button doesn't allow them access back in)
+    - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-    - [ ] \(mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+     - [X] \11/06/2021 Basic security rules implemented
+      - https://github.com/vincentprata/IT202-003/pull/32
+      - Authentication:
+        - [X] Function to check if user is logged in
+        - [X] Function should be called on appropriate pages that only allow logged in users
+      - Roles/Authorization:
+        - [X] Have a roles table (see below)
+    - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) Any output messages should be "user friendly"
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+     - [X] \11/06/2021 Basic Roles implemented
+      - https://github.com/vincentprata/IT202-003/pull/32
+      - Have a Roles table (id, name, description, is_active, modified, created)
+      - Have a User Roles table (id, user_id, role_id, is_active, created, modified)
+      - Include a function to check if a user has a specific role (we won't use it for this milestone but it should be usable in the future)
+    - Status: Completed
 
-     - [ ] \(mm/dd/yyyy of completion) User will be able to edit their profile
+
+    - [X] \11/06/2021 Site should have basic styles/theme applied; everything should be styled
+      - I.e., forms/input, navigation bar, etc
+        - https://github.com/vincentprata/IT202-003/pull/42
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show                     
+    - Status: Completed
+    
+
+     - [X] \11/06/2021 Any output messages should be "user friendly"
+      - https://github.com/vincentprata/IT202-003/pull/17
+      - Any technical errors or debug output displayed will result in a loss of points
+    - Status: Completed
+
+     - [X] \11/06/2021 User will be able to see their profile
+      - https://github.com/vincentprata/IT202-003/pull/40
+      - Email, username, etc
+    - Status: Completed
+
+     - [X] \11/06/2021 User will be able to edit their profile
+      - https://github.com/vincentprata/IT202-003/pull/40
+      - Changing username/email should properly check to see if it's available before allowing the change
+      - Any other fields should be properly validated
+      - Allow password reset (only if the existing correct password is provided)
+        - [X] Hint: logic for the password check would be similar to login
+    - Status: Completed                  
 
 
 - Milestone 2
