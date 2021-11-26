@@ -9,7 +9,7 @@ if (!has_role("Admin")) {
 //update the item
 if (isset($_POST["submit"])) {
     if (update_data("Products", $_GET["id"], $_POST)) {
-        flash("Updated product", "success");
+        flash("Updated item", "success");
     }
 }
 
@@ -43,7 +43,7 @@ function mapColumn($col)
 }
 ?>
 <div class="container-fluid">
-    <h1>Edit Product</h1>
+    <h1>Edit Item</h1>
     <form method="POST">
         <?php foreach ($result as $column => $value) : ?>
             <?php /* Lazily ignoring fields via hardcoded array*/ ?>
@@ -60,5 +60,5 @@ function mapColumn($col)
 
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../../partials/footer.php");
 ?>

@@ -18,7 +18,7 @@ $columns = get_columns("Products");
 $ignore = ["id", "modified", "created"];
 ?>
 <div class="container-fluid">
-    <h1>Add Product</h1>
+    <h1>Add Item</h1>
     <form method="POST">
         <?php foreach ($columns as $index => $column) : ?>
             <?php /* Lazily ignoring fields via hardcoded array*/ ?>
@@ -34,5 +34,5 @@ $ignore = ["id", "modified", "created"];
 </div>
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../../partials/footer.php");
 ?>

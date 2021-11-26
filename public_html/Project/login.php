@@ -84,7 +84,6 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                             $_SESSION["user"]["roles"] = []; //no roles
                         }
                         //M2-Feat-Accounts
-                        get_or_create_account();
                         die(header("Location: home.php"));
                     } else {
                         flash("Invalid password", "danger");

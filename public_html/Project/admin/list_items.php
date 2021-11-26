@@ -8,11 +8,11 @@ if (!has_role("Admin")) {
 }
 
 $results = [];
-if (isset($_POST["productName"])) {
+if (isset($_POST["itemName"])) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT id, name, description, category, stock, unit_price from Products WHERE name like :name LIMIT 50");
+    $stmt = $db->prepare("SELECT id, name, description, stock, cost from Products WHERE name like :name LIMIT 50");
     try {
-        $stmt->execute([":name" => "%" . $_POST["productName"] . "%"]);
+        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
@@ -23,7 +23,7 @@ if (isset($_POST["productName"])) {
 }
 ?>
 <div class="container-fluid">
-    <h1>List Products</h1>
+    <h1>List Items</h1>
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
         <div class="input-group mb-3">
             <input class="form-control" type="search" name="itemName" placeholder="Item Filter" />
@@ -50,7 +50,7 @@ if (isset($_POST["productName"])) {
 
 
                     <td>
-                        <a href="edit_product.php?id=<?php se($record, "id"); ?>">Edit</a>
+                        <a href="edit_item.php?id=<?php se($record, "id"); ?>">Edit</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -59,5 +59,5 @@ if (isset($_POST["productName"])) {
 </div>
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../../partials/footer.php");
 ?>

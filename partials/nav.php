@@ -31,7 +31,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <script src="<?php echo get_url('helpers.js'); ?>"></script>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo get_url('home.php'); ?>">Home</a>
+        <a class="navbar-brand" href="#">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -69,22 +69,11 @@ require_once(__DIR__ . "/../lib/functions.php");
                         </ul>
                     </li>
                 <?php endif; ?>
-                <?php if (has_role("Admin")) : ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="rolesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin Misc
-                        </a>
-                        <ul class="dropdown-menu bg-warning" aria-labelledby="rolesDropdown">
-                            <li><a class="dropdown-item" href="<?php echo get_url('admin/give_bills.php'); ?>">Give Bills</a></li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
                 <?php if (is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
                 <?php endif; ?>
             </ul>
-            <span class="navbar-text show-balance">
-                Test Placeholder, should get replaced if balance works
+            <span class="navbar-text show-subtotal">
             </span>
         </div>
     </div>

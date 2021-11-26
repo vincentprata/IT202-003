@@ -20,10 +20,3 @@ canvas{
 label{
     text-transform: capitalize;
 }
-#flash{
-    /*position:absolute;*/
-}
-.scroll-content{
-    height: 70vh;
-    overflow: auto;
-}
