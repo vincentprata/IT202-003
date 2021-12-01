@@ -225,26 +225,26 @@ function inputMap($fieldType)
     return "text"; //default
 }
 
-function add_item($item_id, $user_id, $unit_cost, $quantity = 1)
+function add_item($product_id, $user_id, $unit_cost, $desired_quantity = 1)
 {
-    error_log("add_item() Item ID: $item_id, User_id: $user_id, Unit Cost: $unit_cost, Quantity: $quantity");
+    error_log("add_item() Product ID: $product_id, User_id: $user_id, Unit Cost: $unit_cost, Desired Quantity: $desired_quantity");
     //I'm using negative values for predefined items so I can't validate >= 0 for item_id
-    if (/*$item_id <= 0 ||*/$user_id <= 0 || $quantity === 0) {
+    if (/*$item_id <= 0 ||*/$user_id <= 0 || $desired_quantity === 0) {
         
         return;
     }
     $db = getDB();
-    $stmt = $db->prepare("INSERT INTO Cart (item_id, user_id, quantity, unit_cost) VALUES (:iid, :uid, :q, :uc) ON DUPLICATE KEY UPDATE quantity = quantity + :q");
+    $stmt = $db->prepare("INSERT INTO Cart (product_id, user_id, desired_quantity, unit_cost) VALUES (:iid, :uid, :q, :uc) ON DUPLICATE KEY UPDATE desired_quantity = desired_quantity + :q");
     try {
         //if using bindValue, all must be bind value, can't split between this an execute assoc array
         $stmt->bindValue(":q", $unit_cost, PDO::PARAM_INT);
-        $stmt->bindValue(":uc", $quantity, PDO::PARAM_INT);
-        $stmt->bindValue(":iid", $item_id, PDO::PARAM_INT);
+        $stmt->bindValue(":uc", $desired_quantity, PDO::PARAM_INT);
+        $stmt->bindValue(":iid", $product_id, PDO::PARAM_INT);
         $stmt->bindValue(":uid", $user_id, PDO::PARAM_INT);
         $stmt->execute();
         return true;
     } catch (PDOException $e) {
-        error_log("Error adding $quantity of $item_id to user $user_id: " . var_export($e->errorInfo, true));
+        error_log("Error adding $desired_quantity of $product_id to user $user_id: " . var_export($e->errorInfo, true));
     }
     return false;
 }

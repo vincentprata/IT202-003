@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS Products(
     stock int DEFAULT  0,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-    cost int DEFAULT  99999,
+    unit_price int DEFAULT  99999,
     visibility boolean DEFAULT False
 )

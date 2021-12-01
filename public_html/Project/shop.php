@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT id, name, description, cost, stock FROM Products WHERE stock > 0 and visibility = 1 LIMIT 50");
+$stmt = $db->prepare("SELECT id, name, description, unit_price, stock, category FROM Products WHERE stock > 0 and visibility = 1 LIMIT 50");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -15,7 +15,7 @@ try {
 }
 ?>
 <script>
-    function addtoCart(item, cost) {
+    function addtoCart(item, unit_price) {
         console.log("TODO purchase item", item);
         let example = 1;
         if (example === 1) {
@@ -32,9 +32,9 @@ try {
             }
             http.open("POST", "api/add_to_cart.php", true);
             let data = {
-                item_id: item,
-                quantity: 1,
-                cost: cost
+                product_id: item,
+                desired_quantity: 1,
+                unit_cost: unit_price
             }
             let q = Object.keys(data).map(key => key + '=' + data[key]).join('&');
             console.log(q)
@@ -42,9 +42,9 @@ try {
             http.send(q);
         } else if (example === 2) {
             let data = new FormData();
-            data.append("item_id", item);
-            data.append("quantity", 1);
-            data.append("cost", cost);
+            data.append("product_id", item);
+            data.append("desired_quantity", 1);
+            data.append("unit_cost", unit_price);
             fetch("api/add_to_cart.php", {
                     method: "POST",
                     headers: {
@@ -63,9 +63,9 @@ try {
                 });
         } else if (example === 3) {
             $.post("api/add_to_cart.php", {
-                    item_id: item,
-                    quantity: 1,
-                    cost: cost
+                    product_id: item,
+                    desired_quantity: 1,
+                    unit_cost: unit_price
                 }, (resp, status, xhr) => {
                     console.log(resp, status, xhr);
                     let data = JSON.parse(resp);
@@ -89,14 +89,17 @@ try {
                     <div class="card-body">
                         <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
                         <p class="card-text">Description: <?php se($item, "description"); ?></p>
+                        <p class="card-text">In Stock: <?php se($item, "stock"); ?></p>
+                        <p class="card-text">Category: <?php se($item, "category"); ?></p>
+
                     </div>
                     <div class="card-footer">
-                        Cost: <?php se($item, "cost"); ?>
+                        Cost: <?php se($item, "unit_price"); ?>
                         <!-- example form submit-->
                         <form action="api/add_to_cart.php" method="POST">
-                            <input type="hidden" name="item_id" value="<?php se($item, 'id'); ?>" />
-                            <input type="hidden" name="cost" value="<?php se($item, 'cost'); ?>" />
-                            <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
+                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_price'); ?>" />
+                            <input type="hidden" name="desired_quantity" value="1" />
                             <input type="submit" value="Add to Cart" />
                         </form>
                     </div>
