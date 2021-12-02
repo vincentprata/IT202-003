@@ -54,7 +54,7 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
         add_item($product_id, $user_id, $desired_quantity, $unit_cost);
         http_response_code(200);
         $response["message"] = "Purchased $desired_quantity of $name";
-        //die(header("Location: $BASE_PATH" . "home.php"));
+        die(header("Location: $BASE_PATH" . "cart.php"));
         //success
         
     }

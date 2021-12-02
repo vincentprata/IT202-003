@@ -87,19 +87,17 @@ try {
                 <div class="card bg-dark">
 
                     <div class="card-body">
-                        <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
-                        <p class="card-text">Description: <?php se($item, "description"); ?></p>
+                        <h5 class="card-title"><?php se($item, "name"); ?></h5>
                         <p class="card-text">In Stock: <?php se($item, "stock"); ?></p>
-                        <p class="card-text">Category: <?php se($item, "category"); ?></p>
+                        <p class="card-text">Cost: <?php se($item, "unit_price"); ?></p>
 
                     </div>
                     <div class="card-footer">
-                        Cost: <?php se($item, "unit_price"); ?>
                         <!-- example form submit-->
                         <form action="api/add_to_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
                             <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_price'); ?>" />
-                            <input type="hidden" name="desired_quantity" value="1" />
+                            <input type="text" placeholder="Quantity" name="desired_quantity" />
                             <input type="submit" value="Add to Cart" />
                         </form>
                     </div>
