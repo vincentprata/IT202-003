@@ -4,10 +4,11 @@
 $response = ["message" => "There was a problem completing your purchase"];
 http_response_code(400);
 error_log("req: " . var_export($_POST, true));
-if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_POST["unit_cost"])) {
+if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_POST["unit_cost"]) ) {
     require_once(__DIR__ . "/../../../lib/functions.php");
     session_start();
     $user_id = get_user_id();
+    $stock = get_stock();
     $product_id = (int)se($_POST, "product_id", 0, false);
     $desired_quantity = (int)se($_POST, "desired_quantity", 0, false);
     $unit_cost = (int)se($_POST, "unit_cost", 0, false);
