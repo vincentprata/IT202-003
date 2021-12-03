@@ -28,7 +28,7 @@ try {
 
                     </div>
                     <div class="card-footer">
-                        Total Cost: <?php se($item, "unit_cost")?>
+                        Sub Total: <?php se($item, "subTotal");?>
                         <!-- example form submit-->
                         <form action="product_details.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />

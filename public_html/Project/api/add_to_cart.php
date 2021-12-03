@@ -8,7 +8,6 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
     require_once(__DIR__ . "/../../../lib/functions.php");
     session_start();
     $user_id = get_user_id();
-    $stock = get_stock();
     $product_id = (int)se($_POST, "product_id", 0, false);
     $desired_quantity = (int)se($_POST, "desired_quantity", 0, false);
     $unit_cost = (int)se($_POST, "unit_cost", 0, false);
