@@ -28,7 +28,7 @@ try {
                 <div class="card bg-dark">
 
                     <div class="card-body">
-                        <h5 class="card-title">Product ID: <?php se($item, "product_id"); ?></h5>
+                        <h5 class="card-title">Product ID: <?php se($item, "name"); ?></h5>
                         <p class="card-text">Quantity: <?php se($item, "desired_quantity"); ?></p>
                         <p class="card-text">Unit Price: <?php se($item, "unit_cost"); ?></p>
 
