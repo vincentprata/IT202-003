@@ -30,7 +30,7 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
         array_push($errors, "Invalid item");
         $isValid = false;
     }*/
-    if ($desired_quantity <= 0) {
+    if ($desired_quantity < 0) {
         //invalid quantity
         array_push($errors, "Invalid quantity");
         $isValid = false;

@@ -28,13 +28,20 @@ try {
 
                     </div>
                     <div class="card-footer">
-                        Sub Total: <?php se($item, "subTotal");?>
+                        Sub Total: <?php ?>
                         <!-- example form submit-->
                         <form action="product_details.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
                             <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_price'); ?>" />
                             <input type="hidden" name="desired_quantity" value="1" />
                             <input type="submit" value="Product Details" />
+                        </form>
+                        <form action="api/add_to_cart.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
+                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
+                            <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity'); ?>" />
+                            <input type="text" placeholder="Quantity" name="desired_quantity" />
+                            <input type="submit" value="Update Quantity" />
                         </form>
                     </div>
                 </div>
