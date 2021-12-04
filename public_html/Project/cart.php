@@ -16,6 +16,12 @@ try {
 ?>
 <div class="container-fluid">
     <h1>Cart</h1>
+    <form action="api/clear_cart.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
+                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
+                            <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity', 0); ?>" />
+                            <input type="submit" value="Clear Cart" />
+                        </form>
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <?php foreach ($results as $item) : ?>
             <div class="col">
@@ -36,12 +42,17 @@ try {
                             <input type="hidden" name="desired_quantity" value="1" />
                             <input type="submit" value="Product Details" />
                         </form>
-                        <form action="api/add_to_cart.php" method="POST">
-                            <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
-                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
-                            <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity'); ?>" />
+                        <form action="api/update_cart.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
+                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_price'); ?>" />
                             <input type="text" placeholder="Quantity" name="desired_quantity" />
                             <input type="submit" value="Update Quantity" />
+                        </form>
+                        <form action="api/remove_item.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
+                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
+                            <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity', 0); ?>" />
+                            <input type="submit" value="Remove Item" />
                         </form>
                     </div>
                 </div>
