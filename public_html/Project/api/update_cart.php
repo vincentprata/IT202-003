@@ -1,56 +1,55 @@
 <?php
-//remember, API endpoints should only echo/output precisely what you want returned
-//any other unexpected characters can break the handling of the response
-$response = ["message" => "There was a problem completing your purchase"];
+require_once(__DIR__ . "/../../../lib/functions.php");
+session_start();
+//$response = ["message" => "There was a problem completing your purchase"];
 http_response_code(400);
-error_log("req: " . var_export($_POST, true));
-if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_POST["unit_cost"]) ) {
-    require_once(__DIR__ . "/../../../lib/functions.php");
-    session_start();
+error_log(var_export($_POST, true));
+if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"])) {
+    $desired_quantity = se($_POST, "desired_quantity", 0, false);
+    $product_id = se($_POST, "product_id", 0, false);
     $user_id = get_user_id();
-    $product_id = (int)se($_POST, "product_id", 0, false);
-    $desired_quantity = (int)se($_POST, "desired_quantity", 0, false);
-    $unit_cost = (int)se($_POST, "unit_cost", 0, false);
     $isValid = true;
-    $errors = [];
-    //I'll have predefined items loaded in at negative values
-    //so I don't need/want this check
-    /*if ($item_id <= 0) {
-        //invalid item
-        array_push($errors, "Invalid item");
-        $isValid = false;
-    }*/
-    if ($desired_quantity < 0) {
-        //invalid quantity
-        array_push($errors, "Invalid quantity");
-        $isValid = false;
-    }
-    //get true price from DB, don't trust the client
     $db = getDB();
-    $stmt = $db->prepare("Update Cart set desired_quantity = :dq where product_id = :id");
+    //deduct item
+    $stmt = $db->prepare("UPDATE Cart set desired_quantity = $desired_quantity WHERE product_id = :id");
     try {
         $stmt->execute([":id" => $product_id]);
-        $stmt->execute([":dq" => $desired_quantity]);
-        $r = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($r) {
-            $unit_price = (int)se($r, "unit_cost", 0, false);
-            $name = se($r, "name", "", false);
-        }
+        //TODO check if "check" constraint failed (quantity < 0)
+        //TODO check affected rows (0 means they didn't own the item)
     } catch (PDOException $e) {
-        error_log("Error getting cost of $product_id: " . var_export($e->errorInfo, true));
-        $isValid = false;
+        error_log("Use Item Error: " . var_export($e->errorInfo, true));
+        if ($e->errorInfo[1] === 3819) {
+            http_response_code(404);
+            $response["message"] = "You don't have any of this item remaining";
+            $response["delete"] = $item_id; //tell the UI to remove the item from the grid
+        }
+        $db->rollback();
     }
+
+    if($desired_quantity == 0){
+        $stmt = $db->prepare("DELETE FROM Cart WHERE product_id = :id");
+        try {
+            $stmt->execute([":id" => $product_id]);
+            //TODO check if "check" constraint failed (quantity < 0)
+            //TODO check affected rows (0 means they didn't own the item)
+        } catch (PDOException $e) {
+            error_log("Use Item Error: " . var_export($e->errorInfo, true));
+            if ($e->errorInfo[1] === 3819) {
+                http_response_code(404);
+                $response["message"] = "You don't have any of this item remaining";
+                $response["delete"] = $item_id; //tell the UI to remove the item from the grid
+            }
+            $db->rollback();
+        }
+    }
+    
     if ($isValid) {
-        add_item($product_id, $user_id, $desired_quantity, $unit_cost);
         http_response_code(200);
         $response["message"] = "Purchased $desired_quantity of $name";
         die(header("Location: $BASE_PATH" . "cart.php"));
         //success
         
     }
-    
-    else {
-        $response["message"] = join("<br>", $errors);
-    }
+
 }
 echo json_encode($response);

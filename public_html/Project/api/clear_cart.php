@@ -10,7 +10,7 @@ if (isset($_POST["product_id"])) {
     $isValid = true;
     $db = getDB();
     //deduct item
-    $stmt = $db->prepare("DELETE Cart set desired_quantity = 0 WHERE product_id > 0");
+    $stmt = $db->prepare("DELETE FROM Cart WHERE desired_quantity > 0");
     try {
         $stmt->execute([":id" => $product_id]);
         //TODO check if "check" constraint failed (quantity < 0)
