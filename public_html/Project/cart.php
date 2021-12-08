@@ -59,7 +59,7 @@ try {
                 </div>
             </div>
         <?php endforeach; ?>
-        Total: <?php ?>
+        Total: <?php se($item, 'total'); ?>
     </div>
 </div>
 <?php
