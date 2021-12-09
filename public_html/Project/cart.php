@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT product_id, name, SUM(unit_cost*desired_quantity) as total, unit_cost, desired_quantity, unit_cost*desired_quantity as sub_total from Cart INNER JOIN Products ON Cart.unit_cost = Products.unit_price WHERE desired_quantity > 0");
+$stmt = $db->prepare("SELECT unit_cost, desired_quantity,product_id, name, unit_cost*desired_quantity as sub_total from Cart INNER JOIN Products  ON Cart.product_id = Products.id  WHERE desired_quantity > 0");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -16,6 +16,7 @@ try {
 ?>
 <div class="container-fluid">
     <h1>Cart</h1>
+    Total: <?php echo(get_total()); ?>
     <form action="api/clear_cart.php" method="POST">
         <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
         <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
@@ -59,7 +60,6 @@ try {
                 </div>
             </div>
         <?php endforeach; ?>
-        Total: <?php se($item, 'total'); ?>
     </div>
 </div>
 <?php

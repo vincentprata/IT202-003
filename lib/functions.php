@@ -282,10 +282,36 @@ function persistQueryString($page)
     return http_build_query($_GET);
 }
 
+function get_total()
+{
+    $query = "SELECT SUM(unit_cost*desired_quantity) as total from Cart WHERE desired_quantity > 0";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "total", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error calculating total for cart" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
+
 function get_stock()
 {
-    if (is_logged_in() && isset($_SESSION["user"]["item"])) {
-        return (int)se($_SESSION["user"]["item"], "stock", 0, false);
+    $query = "SELECT stock from Products WHERE visibility = 1";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "stock", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting stock from cart" . var_export($e->errorInfo, true));
     }
     return 0;
 }

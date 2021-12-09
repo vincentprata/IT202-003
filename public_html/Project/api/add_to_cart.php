@@ -8,6 +8,7 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
     require_once(__DIR__ . "/../../../lib/functions.php");
     session_start();
     $user_id = get_user_id();
+    $stock = get_stock();
     $product_id = (int)se($_POST, "product_id", 0, false);
     $desired_quantity = (int)se($_POST, "desired_quantity", 0, false);
     $unit_cost = (int)se($_POST, "unit_cost", 0, false);
@@ -30,7 +31,7 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
         array_push($errors, "Invalid item");
         $isValid = false;
     }*/
-    if ($desired_quantity < 0) {
+    if ($desired_quantity < 0 || $desired_quantity > $stock) {
         //invalid quantity
         array_push($errors, "Invalid quantity");
         $isValid = false;
