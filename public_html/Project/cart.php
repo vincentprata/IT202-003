@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT product_id, unit_cost, desired_quantity from Cart WHERE desired_quantity > 0");
+$stmt = $db->prepare("SELECT unit_cost, desired_quantity,product_id, name, unit_cost*desired_quantity as sub_total from Cart INNER JOIN Products  ON Cart.product_id = Products.id  WHERE desired_quantity > 0");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -16,6 +16,7 @@ try {
 ?>
 <div class="container-fluid">
     <h1>Cart</h1>
+    Total: <?php echo(get_total()); ?>
     <form action="api/clear_cart.php" method="POST">
         <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
         <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
@@ -28,13 +29,13 @@ try {
                 <div class="card bg-dark">
 
                     <div class="card-body">
-                        <h5 class="card-title">Product ID: <?php se($item, "name"); ?></h5>
+                        <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
                         <p class="card-text">Quantity: <?php se($item, "desired_quantity"); ?></p>
-                        <p class="card-text">Unit Price: <?php se($item, "unit_cost"); ?></p>
+                        <p class="card-text">Cost: <?php se($item, "unit_cost"); ?></p>
 
                     </div>
                     <div class="card-footer">
-                        Sub Total: <?php ?>
+                        Sub Total: <?php se($item, 'sub_total'); ?>
                         <!-- example form submit-->
                         <form action="product_details.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
