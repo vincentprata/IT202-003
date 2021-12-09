@@ -23,6 +23,12 @@ try {
         <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity'); ?>" />
         <input type="submit" value="Clear Cart" />
     </form>
+    <form action= "checkout.php" method="POST">
+        <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
+        <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
+        <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity'); ?>" />
+        <input type="submit" value="Checkout" />
+    </form>
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <?php foreach ($results as $item) : ?>
             <div class="col">
