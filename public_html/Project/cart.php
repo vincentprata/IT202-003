@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT product_id, name, unit_cost, desired_quantity, unit_cost*desired_quantity as sub_total from Cart INNER JOIN Products ON Cart.product_id = Products.id WHERE desired_quantity > 0");
+$stmt = $db->prepare("SELECT product_id, name, SUM(unit_cost*desired_quantity) as total, unit_cost, desired_quantity, unit_cost*desired_quantity as sub_total from Cart INNER JOIN Products ON Cart.unit_cost = Products.unit_price WHERE desired_quantity > 0");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
