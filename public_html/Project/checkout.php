@@ -1,64 +1,181 @@
 <?php
-require_once(__DIR__ . "/../../partials/nav.php");
-is_logged_in(true);
+require(__DIR__ . "/../../partials/nav.php");
 ?>
+<script>
+    function validate(form) {
+        //TODO 1: implement JavaScript validation
+        //ensure it returns false for an error and true for success
+        
+        return true;
+    }
+</script>
 
 <div class="container-fluid">
     <h1>Payment Information</h1>
-    <form method="POST" onsubmit="return validate(this);">
+    <p>Please select your method of payment:</p>
+    <form onsubmit="return validate(this)" method="POST">
         <div class="mb-3">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-control" type="email" name="email" id="email" />
+            <input type="radio" id="Cash" id="Cash" name="payment_method" value="Cash">
+            <label for="Cash">Cash</label>
+            <input type="radio" id="Visa" id="Visa" name="payment_method" value="Visa">
+            <label for="Visa">Visa</label>
+            <input type="radio" id="MasterCard" id="MasterCard" name="payment_method" value="MasterCard">
+            <label for="Visa">MasterCard</label>
+            <input type="radio" id="Amex" id="Amex" name="payment_method" value="Amex">
+            <label for="Visa">Amex</label>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="username">Username</label>
-            <input class="form-control" type="text" name="username" id="username" />
+            <label class="form-label" for="payment">Payment</label>
+            <input class="form-control" type="payment" id="payment" name="payment" />
         </div>
-        <div class="mb-3">Password Reset</div>
+        <h1>Shipping Information</h1>
         <div class="mb-3">
-            <label class="form-label" for="cp">Current Password</label>
-            <input class="form-control" type="password" name="currentPassword" id="cp" />
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="np">New Password</label>
-            <input class="form-control" type="password" name="newPassword" id="np" />
+            <label class="form-label" for="streetaddress">Street Address</label>
+            <input class="form-control" type="address" id="address" name="address" />
         </div>
         <div class="mb-3">
-            <label class="form-label" for="conp">Confirm Password</label>
-            <input class="form-control" type="password" name="confirmPassword" id="conp" />
+            <label class="form-label" for="apt">Apartment, suite, etc.</label>
+            <input class="form-control" type="address" id="address" name="address" />
         </div>
-        <input type="submit" class="mt-3 btn btn-primary" value="Update Profile" name="save" />
+        <div class="mb-3">
+            <label class="form-label" for="apt">City</label>
+            <input class="form-control" type="address" id="address" name="address" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="apt">State/Province</label>
+            <input class="form-control" type="address" id="address" name="address" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="apt">Country</label>
+            <input class="form-control" type="address" id="address" name="address" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="apt">Zip/Postal Code</label>
+            <input class="form-control" type="address" id="address" name="address" />
+        </div>
+        <input type="submit" class="mt-3 btn btn-primary" value="Complete Purchase" />
     </form>
 </div>
-<script>
-    function validate(form) {
-        let pw = form.newPassword.value;
-        let con = form.confirmPassword.value;
-        let isValid = true;
-        //TODO add other client side validation....
-
-        //example of using flash via javascript
-        //find the flash container, create a new element, appendChild
-        if (pw !== con) {
-            //find the container
-            /*let flash = document.getElementById("flash");
-            //create a div (or whatever wrapper we want)
-            let outerDiv = document.createElement("div");
-            outerDiv.className = "row justify-content-center";
-            let innerDiv = document.createElement("div");
-            //apply the CSS (these are bootstrap classes which we'll learn later)
-            innerDiv.className = "alert alert-warning";
-            //set the content
-            innerDiv.innerText = "Password and Confirm password must match";
-            outerDiv.appendChild(innerDiv);
-            //add the element to the DOM (if we don't it merely exists in memory)
-            flash.appendChild(outerDiv);*/
-            flash("Password and Confirm password must match", "warning");
-            isValid = false;
-        }
-        return isValid;
-    }
-</script>
 <?php
-require_once(__DIR__ . "/../../partials/footer.php");
-?>
+//remember, API endpoints should only echo/output precisely what you want returned
+//any other unexpected characters can break the handling of the response
+$response = ["message" => "There was a problem completing your purchase"];
+http_response_code(400);
+error_log("req: " . var_export($_POST, true));
+if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST["payment"])) {
+    require_once(__DIR__ . "/../../lib/functions.php");
+    $user_id = get_user_id();
+    $order_id = get_order_id();
+    //$desired_quantity = (int)se($_POST, "desired_quantity", 0, false);
+    $total_price = get_total();
+    //$unit_price = get_unit_price();
+    $product_id = get_product_id();
+    $desired_quantity = get_desired_quantity();
+    $stock = get_stock();
+    $payment = (int)se($_POST, "payment", 0, false);
+    $address = se($_POST, "address", "", false);
+    $payment_method = se($_POST, "payment_method", "", false);
+    $isValid = true;
+
+    if ($user_id <= 0) {
+        //invald user
+        array_push($errors, "Invalid user");
+        $isValid = false;
+    }
+    if ($total_price <= 0) {
+        //not enough funds
+        array_push($errors, "Invalid cost");
+        $isValid = false;
+    }
+
+    //I'll have predefined items loaded in at negative values
+    //so I don't need/want this check
+    /*if ($item_id <= 0) {
+        //invalid item
+        array_push($errors, "Invalid item");
+        $isValid = false;
+    }*/
+    //get true price from DB, don't trust the client
+    $db = getDB();
+    $stmt = $db->prepare("SELECT name,unit_price FROM Products where id = :id");
+    $name = "";
+    try {
+        $stmt->execute([":id" => $product_id]);
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            $unit_price = (int)se($r, "unit_cost", 0, false);
+            $name = se($r, "name", "", false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error with checkout process " . var_export($e->errorInfo, true));
+        $isValid = false;
+    }
+    if ($isValid) {
+        //purchase_item($user_id, $total_price, $address, $payment_method);
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO Orders (address, payment_method, total_price, user_id) VALUES(:address, :pm, :tp, :uid)");
+        try {
+            $stmt->execute([":address" => $address, ":pm" => $payment_method, ":tp" => $total_price, ":uid" => $user_id]);
+            flash("Successful Purchase");
+        } catch (Exception $e) {
+            users_check_duplicate($e->errorInfo);
+        }
+        http_response_code(200);
+        //$response["message"] = "Checkout successful";
+        //die(header("Location: $BASE_PATH" . "cart.php"));
+        //success
+        
+    }
+    
+    else {
+        $response["message"] = join("<br>", $errors);
+    }
+
+
+    if ($isValid) {
+        //purchase_item($user_id, $total_price, $address, $payment_method);
+        $db = getDB();
+        $stmt = $db->prepare("UPDATE Products set stock = stock - $desired_quantity WHERE id = $product_id");
+        try {
+            $stmt->execute();
+            flash("Successful Purchase");
+        } catch (Exception $e) {
+            users_check_duplicate($e->errorInfo);
+        }
+        http_response_code(200);
+        //$response["message"] = "Checkout successful";
+        //die(header("Location: $BASE_PATH" . "cart.php"));
+        //success
+        
+    }
+
+    if ($isValid) {
+        //purchase_item($user_id, $total_price, $address, $payment_method);
+        add_order_item(get_order_id(), $product_id, $desired_quantity, get_unit_price());
+        http_response_code(200);
+        
+    }
+
+    if ($isValid) {
+        //purchase_item($user_id, $total_price, $address, $payment_method);
+        $db = getDB();
+        $stmt = $db->prepare("DELETE FROM Cart");
+        try {
+            $stmt->execute();
+            flash("Successful Purchase");
+        } catch (Exception $e) {
+            users_check_duplicate($e->errorInfo);
+        }
+        http_response_code(200);
+        
+        
+    }
+
+
+  
+
+
+
+}
+
+//echo json_encode($response);
