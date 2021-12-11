@@ -249,6 +249,30 @@ function add_item($product_id, $user_id, $unit_cost, $desired_quantity = 1)
     return false;
 }
 
+function purchase_item($user_id, $total_price, $address, $payment_method)
+{
+    error_log("add_item() User_id: $user_id, Total Price: $total_price, Payment Method: $payment_method");
+    //I'm using negative values for predefined items so I can't validate >= 0 for item_id
+    if (/*$item_id <= 0 ||*/$user_id <= 0 || $payment_method === 0) {
+        
+        return;
+    }
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, address, payment_method) VALUES (:uid, :tp, :ad, :pm)");
+    try {
+        //if using bindValue, all must be bind value, can't split between this an execute assoc array
+        $stmt->bindValue(":uid", $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(":tp", $total_price, PDO::PARAM_INT);
+        $stmt->bindValue(":ad", $address, PDO::PARAM_INT);
+        $stmt->bindValue(":pm", $payment_method, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error with checkout process" . var_export($e->errorInfo, true));
+    }
+    return false;
+}
+
 function paginate($query, $params = [], $per_page = 10)
 {
     global $page; //will be available after function is called
@@ -314,4 +338,96 @@ function get_stock()
         error_log("Error getting stock from cart" . var_export($e->errorInfo, true));
     }
     return 0;
+}
+
+function get_product_id()
+{
+    $query = "SELECT product_id from Cart";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "product_id", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting Product ID" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
+
+function get_desired_quantity()
+{
+    $query = "SELECT desired_quantity from Cart";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "desired_quantity", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting desired_quantity" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
+
+function get_order_id()
+{
+    $query = "SELECT id from Orders";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "id", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting Order ID" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
+
+function get_unit_price()
+{
+    $query = "SELECT unit_cost from Cart";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "unit_cost", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting unit price" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
+
+function add_order_item($order_id, $product_id, $quantity, $unit_price)
+{
+    error_log("add_order_item() Order ID: $order_id, Product ID: $product_id, Quantity: $quantity Unit Price: $unit_price");
+    //I'm using negative values for predefined items so I can't validate >= 0 for item_id
+    if (/*$item_id <= 0 ||*/$order_id <= 0 || $quantity === 0) {
+        
+        return;
+    }
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES (:oid, :pid, :q, :up)");
+    try {
+        //if using bindValue, all must be bind value, can't split between this an execute assoc array
+        $stmt->bindValue(":oid", $order_id, PDO::PARAM_INT);
+        $stmt->bindValue(":pid", $product_id, PDO::PARAM_INT);
+        $stmt->bindValue(":q", $quantity, PDO::PARAM_INT);
+        $stmt->bindValue(":up", $unit_price, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error adding $quantity of $product_id" . var_export($e->errorInfo, true));
+    }
+    return false;
 }
