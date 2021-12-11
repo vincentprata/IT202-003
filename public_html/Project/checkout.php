@@ -167,6 +167,7 @@ if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST[
             users_check_duplicate($e->errorInfo);
         }
         http_response_code(200);
+        die(header("Location: $BASE_PATH" . "order_confirmation.php"));
         
         
     }
