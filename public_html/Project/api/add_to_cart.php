@@ -8,6 +8,7 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
     require_once(__DIR__ . "/../../../lib/functions.php");
     session_start();
     $user_id = get_user_id();
+    $stock = get_stock();
     $product_id = (int)se($_POST, "product_id", 0, false);
     $desired_quantity = (int)se($_POST, "desired_quantity", 0, false);
     $unit_cost = (int)se($_POST, "unit_cost", 0, false);
@@ -30,14 +31,9 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
         array_push($errors, "Invalid item");
         $isValid = false;
     }*/
-    if ($desired_quantity < 0) {
-        //invalid quantity
-        array_push($errors, "Invalid quantity");
-        $isValid = false;
-    }
     //get true price from DB, don't trust the client
     $db = getDB();
-    $stmt = $db->prepare("SELECT name,unit_price FROM Products where id = :id");
+    $stmt = $db->prepare("SELECT name,unit_price, stock FROM Products where id = :id");
     $name = "";
     try {
         $stmt->execute([":id" => $product_id]);
@@ -45,6 +41,12 @@ if (isset($_POST["product_id"]) && isset($_POST["desired_quantity"]) && isset($_
         if ($r) {
             $unit_price = (int)se($r, "unit_cost", 0, false);
             $name = se($r, "name", "", false);
+            $stock = (int)se($r, "stock", 0, false);
+            if ($desired_quantity > $stock || $desired_quantity <= 0) {
+                $isValid = false;
+                flash("Invalid Quantity");
+                die(header("Location: $BASE_PATH" . "shop.php"));
+            }
         }
     } catch (PDOException $e) {
         error_log("Error getting cost of $product_id: " . var_export($e->errorInfo, true));
