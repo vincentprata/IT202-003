@@ -98,6 +98,7 @@ if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST[
     //get true price from DB, don't trust the client
     $db = getDB();
     $stmt = $db->prepare("SELECT name,unit_price FROM Products where id = :id");
+    $stmtZ = $db->prepare("SELECT product_id,desired_quantity,unit_cost FROM Cart");
     $name = "";
     try {
         $stmt->execute([":id" => $product_id]);
@@ -114,30 +115,14 @@ if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST[
         //purchase_item($user_id, $total_price, $address, $payment_method);
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO Orders (address, payment_method, total_price, user_id) VALUES(:address, :pm, :tp, :uid)");
+        $stmtA = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES(:oid, :pid, :q, :up)");
+        $stmtB = $db->prepare("UPDATE Products set stock = stock - $desired_quantity WHERE id = $product_id");
+        $stmtC = $db->prepare("DELETE FROM Cart");
         try {
             $stmt->execute([":address" => $address, ":pm" => $payment_method, ":tp" => $total_price, ":uid" => $user_id]);
-            flash("Successful Purchase");
-        } catch (Exception $e) {
-            users_check_duplicate($e->errorInfo);
-        }
-        http_response_code(200);
-        //$response["message"] = "Checkout successful";
-        //die(header("Location: $BASE_PATH" . "cart.php"));
-        //success
-        
-    }
-    
-    else {
-        $response["message"] = join("<br>", $errors);
-    }
-
-
-    if ($isValid) {
-        //purchase_item($user_id, $total_price, $address, $payment_method);
-        $db = getDB();
-        $stmt = $db->prepare("UPDATE Products set stock = stock - $desired_quantity WHERE id = $product_id");
-        try {
-            $stmt->execute();
+            $stmtA->execute([":oid" => get_order_id(), ":pid" => $product_id, ":q" => $desired_quantity, ":up" => get_unit_price()]);
+            $stmtB->execute();
+            $stmtC->execute();
             flash("Successful Purchase");
         } catch (Exception $e) {
             users_check_duplicate($e->errorInfo);
@@ -149,28 +134,7 @@ if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST[
         
     }
 
-    if ($isValid) {
-        //purchase_item($user_id, $total_price, $address, $payment_method);
-        add_order_item(get_order_id(), $product_id, $desired_quantity, get_unit_price());
-        http_response_code(200);
-        
-    }
 
-    if ($isValid) {
-        //purchase_item($user_id, $total_price, $address, $payment_method);
-        $db = getDB();
-        $stmt = $db->prepare("DELETE FROM Cart");
-        try {
-            $stmt->execute();
-            flash("Successful Purchase");
-        } catch (Exception $e) {
-            users_check_duplicate($e->errorInfo);
-        }
-        http_response_code(200);
-        die(header("Location: $BASE_PATH" . "order_confirmation.php"));
-        
-        
-    }
 
 
   
