@@ -15,6 +15,7 @@ if (!in_array($order, ["asc", "desc"])) {
     $order = "asc"; //default value, prevent sql injection
 }
 $name = se($_GET, "name", "", false);
+$category = se($_GET, "category", "", false);
 //split query into data and total
 $base_query = "SELECT id, name, description, unit_price, category, stock FROM Products items";
 $total_query = "SELECT count(1) as total FROM Products items";
@@ -148,6 +149,11 @@ try {
                 <div class="input-group-text">Name</div>
                 <input class="form-control" name="name" value="<?php se($name); ?>" />
             </div>
+            
+            <div class="input-group">
+                <div class="input-group-text">Category</div>
+                <input class="form-control" name="category" value="<?php se($category); ?>" />
+            </div>
         </div>
         <div class="col">
             <div class="input-group">
@@ -155,7 +161,6 @@ try {
                 <!-- make sure these match the in_array filter above-->
                 <select class="form-control" name="col" value="<?php se($col); ?>">
                     <option value="unit_price">Price</option>
-                    <option value="category">Category</option>
                 </select>
                 <script>
                     //quick fix to ensure proper value is selected since
