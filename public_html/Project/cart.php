@@ -94,44 +94,56 @@ try {
         <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity'); ?>" />
         <input type="submit" value="Checkout" />
     </form>
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <?php foreach ($results as $item) : ?>
-            <div class="col">
-                <div class="card bg-dark">
-
-                    <div class="card-body">
-                        <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
-                        <p class="card-text">Quantity: <?php se($item, "desired_quantity"); ?></p>
-                        <p class="card-text">Cost: <?php se($item, "unit_cost"); ?></p>
-
-                    </div>
-                    <div class="card-footer">
-                        Sub Total: <?php se($item, 'sub_total'); ?>
-                        <!-- example form submit-->
-                        <form action="product_details.php" method="POST">
-                            <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
-                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_price'); ?>" />
-                            <input type="hidden" name="desired_quantity" value="1" />
-                            <input type="submit" value="Product Details" />
-                        </form>
-                        <form action="api/update_cart.php" method="POST">
-                            <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
-                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
-                            <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity'); ?>" />
-                            <input type="text" placeholder="Quantity" name="desired_quantity" />
-                            <input type="submit" value="Update Quantity" />
-                        </form>
-                        <form action="api/remove_item.php" method="POST">
-                            <input type="hidden" name="product_id" value="<?php se($item, 'product_id'); ?>" />
-                            <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_cost'); ?>" />
-                            <input type="hidden" name="desired_quantity" value="<?php se($item, 'desired_quantity', 0); ?>" />
-                            <input type="submit" value="Remove Item" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <table class="table text-light">
+        <thead>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Sub Total</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <?php if (count($results) > 0) : ?>
+                <?php foreach ($results as $row) : ?>
+                    <tr>
+                        <td><?php se($row, "name"); ?></td>
+                        <td><?php se($row, "desired_quantity"); ?></td>
+                        <td><?php se($row, "unit_cost"); ?></td>
+                        <td><?php se($row, "sub_total"); ?></td>
+                        <td>
+                            <?php if (se($row, "joined", 0, false)) : ?>
+                                <button class="btn btn-primary disabled" onclick="event.preventDefault()" disabled>Already Joined</button>
+                            <?php else : ?>
+                                <form action="product_details.php" method="POST">
+                                    <input type="hidden" name="product_id" value="<?php se($item, 'id'); ?>" />
+                                    <input type="hidden" name="unit_cost" value="<?php se($item, 'unit_price'); ?>" />
+                                    <input type="hidden" name="desired_quantity" value="1" />
+                                    <input type="submit" value="Product Details" />
+                                </form>
+                                <form action="api/update_cart.php" method="POST">
+                                    <input type="hidden" name="product_id" value="<?php se($row, 'product_id'); ?>" />
+                                    <input type="hidden" name="unit_cost" value="<?php se($row, 'unit_cost'); ?>" />
+                                    <input type="hidden" name="desired_quantity" value="<?php se($row, 'desired_quantity'); ?>" />
+                                    <input type="text" placeholder="Quantity" name="desired_quantity" />
+                                    <input type="submit" value="Update Quantity" />
+                                </form>
+                                <form action="api/remove_item.php" method="POST">
+                                    <input type="hidden" name="product_id" value="<?php se($row, 'product_id'); ?>" />
+                                    <input type="hidden" name="unit_cost" value="<?php se($row, 'unit_cost'); ?>" />
+                                    <input type="hidden" name="desired_quantity" value="<?php se($row, 'desired_quantity', 0); ?>" />
+                                    <input type="submit" value="Remove Item" />
+                                </form>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="100%">Cart is empty</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 <?php
 require(__DIR__ . "/../../partials/footer.php");
