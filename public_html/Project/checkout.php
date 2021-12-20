@@ -88,6 +88,12 @@ if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST[
         $isValid = false;
     }
 
+    if ($payment < 0 || $payment != $total_price) {
+        flash("Invalid payment amount");
+        redirect("cart.php");
+        $isValid = false;
+    }
+
     //I'll have predefined items loaded in at negative values
     //so I don't need/want this check
     /*if ($item_id <= 0) {
@@ -123,13 +129,13 @@ if (isset($_POST["address"]) && isset($_POST["payment_method"]) && isset($_POST[
             $stmtA->execute([":oid" => get_order_id(), ":pid" => $product_id, ":q" => $desired_quantity, ":up" => get_unit_price()]);
             $stmtB->execute();
             $stmtC->execute();
+            redirect("order_confirmation.php");
             flash("Successful Purchase");
         } catch (Exception $e) {
             users_check_duplicate($e->errorInfo);
         }
         http_response_code(200);
         //$response["message"] = "Checkout successful";
-        //die(header("Location: $BASE_PATH" . "cart.php"));
         //success
         
     }

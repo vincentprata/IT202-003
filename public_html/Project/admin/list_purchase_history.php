@@ -11,7 +11,7 @@ if (!has_role("Admin")) {
 $results = [];
 $db = getDB();
 $user_id = get_user_id();
-$stmt = $db->prepare("SELECT total_price, address, payment_method from Orders WHERE user_id = $user_id");
+$stmt = $db->prepare("SELECT total_price, created, address, payment_method from Orders");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,35 +24,36 @@ try {
 ?>
 <div class="container-fluid">
     <h1>All Purchase History</h1>
-    <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
-        <div class="input-group mb-3">
-        </div>
-    </form>
-    <?php if (count($results) == 0) : ?>
-        <p>Cart is empty</p>
-    <?php else : ?>
-        <table class="table text-light">
-            <?php foreach ($results as $index => $record) : ?>
-                <?php if ($index == 0) : ?>
-                    <thead>
-                        <?php foreach ($record as $column => $value) : ?>
-                            <th><?php se($column); ?></th>
-                        <?php endforeach; ?>
-                        
-                    </thead>
-                <?php endif; ?>
+    <table class="table text-light">
+        <thead>
+            <th>Order Placed</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <?php if (count($results) > 0) : ?>
+                <?php foreach ($results as $row) : ?>
+                    <tr>
+                        <td><?php se($row, "created"); ?></td>
+                        <td><?php se($row, "total_price"); ?></td>
+                        <td>
+                            <?php if (se($row, "joined", 0, false)) : ?>
+                                <button class="btn btn-primary disabled" onclick="event.preventDefault()" disabled>Already Joined</button>
+                            <?php else : ?>
+                                <form action="order_details.php" method="POST">
+                                    <input type="submit" value="Order Details" />
+                                </form>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
                 <tr>
-                    <?php foreach ($record as $column => $value) : ?>
-                        <td><?php se($value, null, "N/A"); ?></td>
-                    <?php endforeach; ?>
-
-
-                    <td>
-                    </td>
+                    <td colspan="100%">No purchase history</td>
                 </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 <?php
 //note we need to go up 1 more directory
