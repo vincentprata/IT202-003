@@ -15,7 +15,7 @@ try {
 }
 ?>
 <div class="container-fluid">
-    <h1>Thank You For Your Purchase!</h1>
+    <h1>Order Details</h1>
     <table class="table text-light">
         <thead>
             <th>Order Placed</th>
