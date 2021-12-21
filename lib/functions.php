@@ -446,3 +446,44 @@ function redirect($path)
     echo "<noscript><meta http-equiv=\"refresh\" content=\"0;url=" . get_url($path) . "\"/></noscript>";
     die();
 }
+
+function rate_item($product_id, $user_id, $rating, $comment)
+{
+    error_log("add_order_item() Product ID: $product_id, User ID: $user_id, Rating: $rating Comment: $comment");
+    //I'm using negative values for predefined items so I can't validate >= 0 for item_id
+    if (/*$item_id <= 0 ||*/$rating < 1 || $rating > 5) {
+        
+        return;
+    }
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO Ratings (product_id, user_id, rating, comment) VALUES (:pid, :uid, :rtg, :cmt)");
+    try {
+        //if using bindValue, all must be bind value, can't split between this an execute assoc array
+        $stmt->bindValue(":pid", $product_id, PDO::PARAM_INT);
+        $stmt->bindValue(":uid", $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(":rtg", $rating, PDO::PARAM_INT);
+        $stmt->bindValue(":cmt", $comment, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error rating $product_id" . var_export($e->errorInfo, true));
+    }
+    return false;
+}
+
+function get_average_rating()
+{
+    $query = "SELECT AVG(rating) as avg from Ratings";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (float)se($r, "avg", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error calculating average" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
