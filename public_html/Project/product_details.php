@@ -97,7 +97,6 @@ try {
     </table>
 
     <h1>Product Ratings</h1>
-    //Avg
     Average Rating: <?php echo(get_average_rating()); ?>
     <form class="row row-cols-auto g-3 align-items-center">
         <div class="col">
