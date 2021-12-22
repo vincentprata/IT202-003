@@ -5,6 +5,7 @@ $results = [];
 $db = getDB();
 //Sort and Filters
 $col = se($_GET, "col", "unit_price", false);
+$avg = get_average_rating();
 //allowed list
 if (!in_array($col, ["unit_price", "stock", "name", "created"])) {
     $col = "unit_price"; //default value, prevent sql injection
@@ -20,7 +21,7 @@ $category = se($_GET, "category", "", false);
 $base_query = "SELECT id, name, description, unit_price, category, stock FROM Products items";
 $total_query = "SELECT count(1) as total FROM Products items";
 //dynamic query
-$query = " WHERE 1=1 AND visibility = 1"; //1=1 shortcut to conditionally build AND clauses
+$query = " WHERE 1=1 AND visibility = 1 AND stock > 0"; //1=1 shortcut to conditionally build AND clauses
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
 if (!empty($name)) {
@@ -161,6 +162,9 @@ try {
                 <!-- make sure these match the in_array filter above-->
                 <select class="form-control" name="col" value="<?php se($col); ?>">
                     <option value="unit_price">Price</option>
+                </select>
+                <select class="form-control" name="avg" value="<?php se($avg); ?>">
+                    <option value="avg">Average Rating</option>
                 </select>
                 <script>
                     //quick fix to ensure proper value is selected since
