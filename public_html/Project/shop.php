@@ -5,6 +5,7 @@ $results = [];
 $db = getDB();
 //Sort and Filters
 $col = se($_GET, "col", "unit_price", false);
+$avg = get_average_rating();
 //allowed list
 if (!in_array($col, ["unit_price", "stock", "name", "created"])) {
     $col = "unit_price"; //default value, prevent sql injection
@@ -15,11 +16,12 @@ if (!in_array($order, ["asc", "desc"])) {
     $order = "asc"; //default value, prevent sql injection
 }
 $name = se($_GET, "name", "", false);
+$category = se($_GET, "category", "", false);
 //split query into data and total
 $base_query = "SELECT id, name, description, unit_price, category, stock FROM Products items";
 $total_query = "SELECT count(1) as total FROM Products items";
 //dynamic query
-$query = " WHERE 1=1 AND visibility = 1"; //1=1 shortcut to conditionally build AND clauses
+$query = " WHERE 1=1 AND visibility = 1 AND stock > 0"; //1=1 shortcut to conditionally build AND clauses
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
 if (!empty($name)) {
@@ -148,6 +150,11 @@ try {
                 <div class="input-group-text">Name</div>
                 <input class="form-control" name="name" value="<?php se($name); ?>" />
             </div>
+            
+            <div class="input-group">
+                <div class="input-group-text">Category</div>
+                <input class="form-control" name="category" value="<?php se($category); ?>" />
+            </div>
         </div>
         <div class="col">
             <div class="input-group">
@@ -155,7 +162,9 @@ try {
                 <!-- make sure these match the in_array filter above-->
                 <select class="form-control" name="col" value="<?php se($col); ?>">
                     <option value="unit_price">Price</option>
-                    <option value="category">Category</option>
+                </select>
+                <select class="form-control" name="avg" value="<?php se($avg); ?>">
+                    <option value="avg">Average Rating</option>
                 </select>
                 <script>
                     //quick fix to ensure proper value is selected since
