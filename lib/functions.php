@@ -487,3 +487,20 @@ function get_average_rating()
     }
     return 0;
 }
+
+function get_profit()
+{
+    $query = "SELECT SUM(total_price) as total_profit from Orders";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "total_profit", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error calculating total profit for orders" . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
