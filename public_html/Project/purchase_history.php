@@ -10,6 +10,7 @@ try {
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $results = $r;
+        $created = se($r, "created", "", false);
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
@@ -78,8 +79,13 @@ try {
     <form class="row row-cols-auto g-3 align-items-center">
         <div class="col">
             <div class="input-group">
-                <div class="input-group-text">Name</div>
-                <input class="form-control" name="name" value="<?php se($name); ?>" />
+                <div class="input-group-text">Date Start</div>
+                <input class="form-control" name="created" value="<?php se($created); ?>" />
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-text">Date End</div>
+                <input class="form-control" name="created" value="<?php se($created); ?>" />
             </div>
             
             <div class="input-group">
