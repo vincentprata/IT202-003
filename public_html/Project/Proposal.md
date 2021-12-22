@@ -272,6 +272,334 @@ Stock still the same in products table</td></tr></td></tr></table></td></tr><tab
 </td>
 </tr></td></tr></table>
 - Milestone 4
+
+<table>
+<tr><td>Milestone 4</td></tr><tr><td>
+<table>
+<tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) (2021-12-18)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/profile.php](https://vap6-prod.herokuapp.com/Project/profile.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/106](https://github.com/vincentprata/IT202-003/pull/106)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - If public, hide email address from other users</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147024980-7bec3da7-2cc6-46b4-b059-ba65b000ca73.png">
+<p>Email address hidden on public profile</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - User will be able to rate a product they purchased (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/product_details.php](https://vap6-prod.herokuapp.com/Project/product_details.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/111](https://github.com/vincentprata/IT202-003/pull/111)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Create table called Ratings (id, product_id, user_id, rating, comment, created)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147025854-b82f8b88-da67-4c87-bf92-d2894e0e11c7.png">
+<p>Ratings sql table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - 1-5 rating, text comment done on product details page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147026028-f25d378a-480d-4db7-a451-edb53a610c88.png">
+<p>Rating must be 1-5 with a comment on product details page</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Ratings and Rating Comments will be visible on the Product Details page (Show the latest 10 reviews and paginate anything beyond 10)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147026306-5b283acb-7585-44f1-b49b-3edb9f7d98b2.png">
+<p>Can see ratings, comments with latest 10 reviews shown and anything beyond 10 is paginated</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show the average rating on the Product Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147026539-2722d5d3-1b40-4d42-a3d3-c707da69ca17.png">
+<p>Average rating shown</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User’s Purchase History Changes (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/purchase_history.php](https://vap6-prod.herokuapp.com/Project/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/116](https://github.com/vincentprata/IT202-003/pull/116)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by date range</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147026951-60b02a4a-c0db-46be-8fc1-e8750a8236b3.png">
+<p>Date range filter</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by category</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147027034-5c62ed9e-bba7-4086-927c-1fb5c731a7c2.png">
+<p>Category Filter</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Sort by total, date purchased, etc</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147027217-05b4e3d0-6557-4a5e-9a83-5728f3780a3b.png">
+<p>
+Sort by total, date purchased</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Add pagination (Any filter/sort applied must be followed during the pagination process)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147027349-365d7150-7f82-45e7-a6ad-8f3b3e9aa5b3.png">
+<p>Pagination added</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner Purchase History Changes (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/admin/list_purchase_history.php](https://vap6-prod.herokuapp.com/Project/admin/list_purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/116](https://github.com/vincentprata/IT202-003/pull/116)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - Filter by Date Range, Category and Sort by Total, Date Purchased</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147027634-d49c4d33-2002-4ef1-ac73-a833a9afb7c1.png">
+<p>Store owner filter by date rate, category and sort by total, date purchased</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Add pagination (Any filter/sort applied must be followed during the pagination process)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147027869-bbb622a5-a1d3-450a-ac63-9b565af48970.png">
+<p>Store owner pagination added</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - The result page should show the accurate total price of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147027961-5d3d2c1d-f8d6-49fb-993e-109303f86c0e.png">
+<p>Results page shows total price</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F5 - Add pagination to Shop Page (2021-12-18)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/shop.php?page=1](https://vap6-prod.herokuapp.com/Project/shop.php?page=1)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/106](https://github.com/vincentprata/IT202-003/pull/106)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F5 -  And any other product lists not yet mentioned</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147028159-852fdb7e-2455-4342-bc70-2fa33a675d43.png">
+<p>Shop page has pagination</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F6 - Store Owner will be able to see all products out of stock (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/admin/list_items.php](https://vap6-prod.herokuapp.com/Project/admin/list_items.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/113](https://github.com/vincentprata/IT202-003/pull/113)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F6 - This will be added as a filter to their product list page from Milestone 2</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147028544-b9b4ea27-1e5b-4223-81da-549f8853afd9.png">
+<p>Filter to see out of stock items</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F6 - Pagination should account for this new filter</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147028628-565fe6ca-e251-47d1-ba3a-73b9dcbf4712.png">
+<p>Pagination applied</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147028760-5d6b81ca-06b9-432c-8300-08e7dca62ac8.png">
+<p>Out of stock items shown</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F7 - User can sort products by average rating on the Shop Page (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap6-prod.herokuapp.com/Project/shop.php](https://vap6-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vincentprata/IT202-003/pull/115](https://github.com/vincentprata/IT202-003/pull/115)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F7 - Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/76709142/147029304-ecd0c8a1-17c1-49e0-8dff-32b623d734da.png">
+<p>Can sort products by average rating on shop page</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 ### Intructions
 #### Don't delete this
 1. Pick one project type
