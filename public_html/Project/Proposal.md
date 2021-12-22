@@ -1,8 +1,9 @@
 # Project Name: Simple Shop
 ## Project Summary: This project will create a simple e-commerce site for users. Administrators or store owners will be able to manage inventory and users will be able to manage their cart and place orders.
 ## Github Link: (Prod Branch of Project Folder)
+## Demo Video Link: https://mediaspace.njit.edu/media/Shop%20Project/1_n8zcugvt
 ## Project Board Link: 
-## Website Link: (Heroku Prod of Project folder)
+## Website Link: https://vap6-prod.herokuapp.com/Project/shop.php
 ## Your Name: Vincente Prata
 
 <!--
